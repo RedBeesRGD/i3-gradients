@@ -219,6 +219,9 @@ struct width_height {
  */
 struct deco_render_params {
     struct Colortriple *color;
+    color_t gradient_start; // i3-gradients
+    color_t gradient_end;
+    bool gradients_on;
     int border_style;
     struct width_height con_rect;
     struct width_height con_window_rect;

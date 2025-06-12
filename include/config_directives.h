@@ -112,5 +112,6 @@ CFGFUN(bar_workspace_buttons, const char *value);
 CFGFUN(bar_workspace_min_width, const long width);
 CFGFUN(bar_strip_workspace_numbers, const char *value);
 CFGFUN(bar_strip_workspace_name, const char *value);
+CFGFUN(gradients_on, const char *value);
 CFGFUN(bar_start);
 CFGFUN(bar_finish);

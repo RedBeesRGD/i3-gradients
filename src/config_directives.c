@@ -8,6 +8,7 @@
  *
  */
 #include "all.h"
+#include "libi3.h"
 
 #include <wordexp.h>
 
@@ -592,9 +593,22 @@ CFGFUN(popup_during_fullscreen, const char *value) {
 
 CFGFUN(color_single, const char *colorclass, const char *color) {
     /* used for client.background only currently */
+    /* UNTIL NOW */
+    // wait this by definition involves 2 colors it should really be its own struct like the colortriple thing.. and we probably dont need separate start and end stuff once again.. whatever lets just get it working for now
+    if(strcmp(colorclass, "client.background") == 0) {
     config.client.background = draw_util_hex_to_color(color);
+    }
+    if(strcmp(colorclass, "client.gradient_start") == 0) {
+    config.client.gradient_start = draw_util_hex_to_color(color);
+    }
+    if(strcmp(colorclass, "client.gradient_end") == 0) {
+    config.client.gradient_end = draw_util_hex_to_color(color);
+    }
 }
 
+CFGFUN(gradients_on, const char *value) {
+    config.client.gradients_on = boolstr(value);
+}
 CFGFUN(color, const char *colorclass, const char *border, const char *background, const char *text, const char *indicator, const char *child_border) {
 #define APPLY_COLORS(classname)                                                                              \
     do {                                                                                                     \
@@ -619,7 +633,6 @@ CFGFUN(color, const char *colorclass, const char *border, const char *background
             return;                                                                                          \
         }                                                                                                    \
     } while (0)
-
     APPLY_COLORS(focused_inactive);
     APPLY_COLORS(focused_tab_title);
     APPLY_COLORS(focused);

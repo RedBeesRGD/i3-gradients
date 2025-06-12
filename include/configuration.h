@@ -240,6 +240,9 @@ struct Config {
     /* Color codes are stored here */
     struct config_client {
         color_t background;
+        color_t gradient_start; // i3-gradients
+        color_t gradient_end;
+        bool gradients_on;
         struct Colortriple focused;
         struct Colortriple focused_inactive;
         struct Colortriple focused_tab_title;
