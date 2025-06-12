@@ -629,8 +629,14 @@ void draw_util_image(cairo_surface_t *image, surface_t *surface, int x, int y, i
  * This function is a convenience wrapper and takes care of flushing the
  * surface as well as restoring the cairo state.
  *
- */
+*/
 void draw_util_rectangle(surface_t *surface, color_t color, double x, double y, double w, double h);
+
+/**
+    i3-gradients addition: takes a start and end color to draw a gradient
+*/
+
+void draw_util_rectangle_gradient(surface_t *surface, color_t startColor, color_t endColor, double x, double y, double w, double h);
 
 /**
  * Clears a surface with the given color.

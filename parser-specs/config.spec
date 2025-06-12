@@ -57,8 +57,13 @@ state INITIAL:
   'restart_state'                          -> RESTART_STATE
   'popup_during_fullscreen'                -> POPUP_DURING_FULLSCREEN
   'tiling_drag'                            -> TILING_DRAG
+  'gradients_on'                           -> GRADIENTS_ON
   exectype = 'exec_always', 'exec'         -> EXEC
   colorclass = 'client.background'
+      -> COLOR_SINGLE
+  colorclass = 'client.gradient_start'
+      -> COLOR_SINGLE
+  colorclass = 'client.gradient_end'
       -> COLOR_SINGLE
   colorclass = 'client.focused_inactive', 'client.focused_tab_title', 'client.focused', 'client.unfocused', 'client.urgent', 'client.placeholder'
       -> COLOR_BORDER
@@ -397,6 +402,18 @@ state COLOR_SINGLE:
   color = word
       -> call cfg_color_single($colorclass, $color)
 
+# gradients
+state GRADIENTS_ON:
+  value = word
+      -> call cfg_gradients_on($value)
+
+state COLOR_GRADIENT_START: # this can probably be just one but i suspect that would cause more problems rn 
+    color = word
+        -> call cfg_color_single($colorclass, $color)
+
+state COLOR_GRADIENT_END: # this can probably be just one but i suspect that would cause more problems rn 
+    color = word
+        -> call cfg_color_single($colorclass, $color)
 # colorclass border background text indicator
 state COLOR_BORDER:
   border = word

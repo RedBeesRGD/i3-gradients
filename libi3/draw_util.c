@@ -254,6 +254,7 @@ void draw_util_image(cairo_surface_t *image, surface_t *surface, int x, int y, i
  * surface as well as restoring the cairo state.
  *
  */
+
 void draw_util_rectangle(surface_t *surface, color_t color, double x, double y, double w, double h) {
     if (!surface_initialized(surface)) {
         return;
@@ -277,6 +278,34 @@ void draw_util_rectangle(surface_t *surface, color_t color, double x, double y, 
     cairo_restore(surface->cr);
 }
 
+void draw_util_rectangle_gradient(surface_t *surface, color_t startColor, color_t endColor, double x, double y, double w, double h) {
+    // feature ideas:
+        // control offset?
+        // dithering
+
+    if (!surface_initialized(surface)) {
+        return;
+    }
+
+    cairo_save(surface->cr);
+
+    cairo_set_operator(surface->cr, CAIRO_OPERATOR_SOURCE);
+
+    // Create a linear gradient from top-left to bottom-right of the rectangle
+    cairo_pattern_t *pattern = cairo_pattern_create_linear(x, y, x + w, y + h);
+
+    cairo_pattern_add_color_stop_rgba(pattern, 0.0, startColor.red, startColor.green, startColor.blue, startColor.alpha); 
+    cairo_pattern_add_color_stop_rgba(pattern, 1.0, endColor.red, endColor.green, endColor.blue, endColor.alpha); 
+
+    cairo_set_source(surface->cr, pattern);
+    cairo_rectangle(surface->cr, x, y, w, h);
+    cairo_fill(surface->cr);
+
+    CAIRO_SURFACE_FLUSH(surface->surface);
+
+    cairo_pattern_destroy(pattern);
+    cairo_restore(surface->cr);
+}
 /*
  * Clears a surface with the given color.
  *
