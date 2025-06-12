@@ -496,13 +496,10 @@ void x_draw_decoration(Con *con) {
     struct deco_render_params *p = scalloc(1, sizeof(struct deco_render_params));
 
     /* find out which colors to use */
-        p->gradient_start = config.client.gradient_start;
-        p->gradient_end = config.client.gradient_end;
-    if(config.client.gradients_on) {
-
-        p->gradients_on = true;
-    } else { p->gradients_on = false; // yes i dont know what im doing :c
-        }
+    p->gradient_start = config.client.gradient_start;
+    p->gradient_end = config.client.gradient_end;    
+    p->gradients_on = config.client.gradients_on;
+    
     if (con->urgent) {
         p->color = &config.client.urgent;
     } else if (con == focused || con_inside_focused(con)) {
@@ -639,11 +636,21 @@ void x_draw_decoration(Con *con) {
     DLOG("con->deco_rect = (x=%d, y=%d, w=%d, h=%d) for con->name=%s\n",
          con->deco_rect.x, con->deco_rect.y, con->deco_rect.width, con->deco_rect.height, con->name);
     if(!p->gradients_on) {
-    draw_util_rectangle(dest_surface, p->color->background,
-                        con->deco_rect.x, con->deco_rect.y, con->deco_rect.width, con->deco_rect.height); } else {
-                            draw_util_rectangle_gradient(dest_surface, p->gradient_start, p->gradient_end,
-                        con->deco_rect.x, con->deco_rect.y, con->deco_rect.width, con->deco_rect.height);
-                        } // this is formatted so bad im sorry
+        draw_util_rectangle(dest_surface,
+                            p->color->background,
+                            con->deco_rect.x,
+                            con->deco_rect.y,
+                            con->deco_rect.width,
+                            con->deco_rect.height);
+    } else {
+        draw_util_rectangle_gradient(dest_surface,
+                                     p->gradient_start,
+                                     p->gradient_end,
+                                     con->deco_rect.x,
+                                     con->deco_rect.y,
+                                     con->deco_rect.width,
+                                     con->deco_rect.height);
+    }
 
     /* 5: draw title border */
     x_draw_title_border(con, p, dest_surface);
