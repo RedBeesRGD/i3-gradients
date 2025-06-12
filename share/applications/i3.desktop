@@ -1,9 +1,9 @@
 [Desktop Entry]
 Type=Application
-Name=i3
+Name=i3-gradient
 NoDisplay=true
 GenericName=A dynamic tiling window manager
-Comment=improved dynamic tiling window manager
+Comment=improved dynamic tiling window manager (with gradients!)
 Exec=i3
 X-GNOME-WMName=i3
 X-GNOME-Autostart-Phase=WindowManager
