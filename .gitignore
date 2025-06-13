@@ -44,6 +44,7 @@ compile_commands.json
 /.ccls-cache
 /.clangd
 LAST_VERSION
+/.cache
 
 # We recommend building in a subdirectory called build.
 # If you chose a different directory name,

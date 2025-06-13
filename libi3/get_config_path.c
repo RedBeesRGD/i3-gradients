@@ -39,7 +39,7 @@ char *get_config_path(const char *override_configpath, bool use_system_paths) {
     }
 
     xdg_config_home = resolve_tilde(xdg_config_home);
-    sasprintf(&config_path, "%s/i3/config", xdg_config_home);
+    sasprintf(&config_path, "%s/i3-gradients/config", xdg_config_home);
     free(xdg_config_home);
 
     if (path_exists(config_path)) {
@@ -48,7 +48,7 @@ char *get_config_path(const char *override_configpath, bool use_system_paths) {
     free(config_path);
 
     /* 2: check the traditional path under the home directory */
-    config_path = resolve_tilde("~/.i3/config");
+    config_path = resolve_tilde("~/.i3-gradients/config");
     if (path_exists(config_path)) {
         return config_path;
     }
@@ -69,7 +69,7 @@ char *get_config_path(const char *override_configpath, bool use_system_paths) {
     char *tok = strtok(buf, ":");
     while (tok != NULL) {
         tok = resolve_tilde(tok);
-        sasprintf(&config_path, "%s/i3/config", tok);
+        sasprintf(&config_path, "%s/i3-gradients/config", tok);
         free(tok);
         if (path_exists(config_path)) {
             free(buf);
@@ -81,7 +81,7 @@ char *get_config_path(const char *override_configpath, bool use_system_paths) {
     free(buf);
 
     /* 4: check the traditional path under /etc */
-    config_path = SYSCONFDIR "/i3/config";
+    config_path = SYSCONFDIR "/i3-gradients/config";
     if (path_exists(config_path)) {
         return sstrdup(config_path);
     }

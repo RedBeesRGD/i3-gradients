@@ -488,7 +488,7 @@ common_deps = [
 ]
 
 executable(
-  'i3',
+  'i3-gradients',
   i3srcs,
   install: true,
   include_directories: inc,
