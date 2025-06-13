@@ -1,6 +1,7 @@
 # Todo
 
-- adjust dithering grain and color set in config
+- adjust dithering color set in config
+- smth to address text color
 - change color for inactive windows
 - some infrastructure for adding config stuff more easily?
 - custom overlays
