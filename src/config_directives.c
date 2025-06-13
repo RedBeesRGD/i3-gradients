@@ -606,8 +606,8 @@ CFGFUN(color_single, const char *colorclass, const char *color) {
     }
 }
 
-CFGFUN(gradients_on, const char *value) {
-    config.client.gradients_on = boolstr(value);
+CFGFUN(gradients, const char *value) {
+    config.client.gradients = boolstr(value);
 }
 
 CFGFUN(dithering, const char *value) {

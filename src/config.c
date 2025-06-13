@@ -241,8 +241,8 @@ bool load_configuration(const char *override_configpath, config_load_t load_type
     current_configpath = get_config_path(override_configpath, true);
     if (current_configpath == NULL) {
         die("Unable to find the configuration file (looked at "
-            "$XDG_CONFIG_HOME/i3/config, ~/.i3/config, $XDG_CONFIG_DIRS/i3/config "
-            "and " SYSCONFDIR "/i3/config)");
+            "$XDG_CONFIG_HOME/i3-gradients/config, ~/.i3-gradients/config, $XDG_CONFIG_DIRS/i3-gradients/config "
+            "and " SYSCONFDIR "/i3-gradients/config)");
     }
 
     IncludedFile *file;

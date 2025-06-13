@@ -498,7 +498,7 @@ void x_draw_decoration(Con *con) {
     /* find out which colors to use */
     p->gradient_start = config.client.gradient_start;
     p->gradient_end = config.client.gradient_end;    
-    p->gradients_on = config.client.gradients_on;
+    p->gradients = config.client.gradients;
     p->dithering = config.client.dithering;
     
     if (con->urgent) {
@@ -636,7 +636,7 @@ void x_draw_decoration(Con *con) {
     /* 4: paint the bar */
     DLOG("con->deco_rect = (x=%d, y=%d, w=%d, h=%d) for con->name=%s\n",
          con->deco_rect.x, con->deco_rect.y, con->deco_rect.width, con->deco_rect.height, con->name);
-    if(!p->gradients_on) {
+    if(!p->gradients) {
         draw_util_rectangle(dest_surface,
                             p->color->background,
                             con->deco_rect.x,

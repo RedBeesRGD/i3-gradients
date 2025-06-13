@@ -57,7 +57,7 @@ state INITIAL:
   'restart_state'                          -> RESTART_STATE
   'popup_during_fullscreen'                -> POPUP_DURING_FULLSCREEN
   'tiling_drag'                            -> TILING_DRAG
-  'gradients_on'                           -> GRADIENTS_ON
+  'gradients'                           -> GRADIENTS
   'dithering'                              -> DITHERING
   exectype = 'exec_always', 'exec'         -> EXEC
   colorclass = 'client.background'
@@ -404,9 +404,9 @@ state COLOR_SINGLE:
       -> call cfg_color_single($colorclass, $color)
 
 # gradients
-state GRADIENTS_ON:
+state GRADIENTS:
   value = word
-  -> call cfg_gradients_on($value)
+  -> call cfg_gradients($value)
   
 state COLOR_GRADIENT_START: # this can probably be just one but i suspect that would cause more problems rn 
     color = word
