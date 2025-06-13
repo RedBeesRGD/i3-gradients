@@ -114,5 +114,6 @@ CFGFUN(bar_strip_workspace_numbers, const char *value);
 CFGFUN(bar_strip_workspace_name, const char *value);
 CFGFUN(gradients, const char *value);
 CFGFUN(dithering, const char *value);
+CFGFUN(dither_noise, const char *noise);
 CFGFUN(bar_start);
 CFGFUN(bar_finish);

@@ -500,6 +500,7 @@ void x_draw_decoration(Con *con) {
     p->gradient_end = config.client.gradient_end;    
     p->gradients = config.client.gradients;
     p->dithering = config.client.dithering;
+    p->dither_noise = config.client.dither_noise;
     
     if (con->urgent) {
         p->color = &config.client.urgent;
@@ -651,7 +652,9 @@ void x_draw_decoration(Con *con) {
                                      con->deco_rect.y,
                                      con->deco_rect.width,
                                      con->deco_rect.height,
-                                     p->dithering);
+                                     p->dithering,
+                                     p->dither_noise
+                                    );
     }
 
     /* 5: draw title border */

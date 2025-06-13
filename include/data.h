@@ -223,6 +223,7 @@ struct deco_render_params {
     color_t gradient_end;
     bool gradients;
     bool dithering;
+    double dither_noise;
     int border_style;
     struct width_height con_rect;
     struct width_height con_window_rect;

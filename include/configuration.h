@@ -244,6 +244,7 @@ struct Config {
         color_t gradient_end;
         bool gradients;
         bool dithering;
+        double dither_noise;
         struct Colortriple focused;
         struct Colortriple focused_inactive;
         struct Colortriple focused_tab_title;

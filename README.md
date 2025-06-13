@@ -2,9 +2,10 @@
 
 i3 with gradient titlebars.
 
-Toggle with config `gradients_on` (this will probably be renamed soon)
-Dithering can also be enabled with `dithering on/off` in the config.
+Toggle with config `gradients on/off`. Dithering can also be toggled with `dithering on/off`.
 
-Set start and end colors with `client.gradient_start` and `client.gradient_end`
+# Options
 
-Todo: code cleanup, dithering, specify offset, specify things like drawing the gradient on window borders or bar buttons, more features beyond gradients, add a screenshot to this readme
+Gradient start and end colors: `client.gradient_start` and `client.gradient_end` followed by a hex color.
+
+Dither noise/grain level: `dither_noise` followed by a floating-point number (recommended range 0-1)

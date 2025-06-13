@@ -613,6 +613,9 @@ CFGFUN(gradients, const char *value) {
 CFGFUN(dithering, const char *value) {
     config.client.dithering = boolstr(value);
 }
+CFGFUN(dither_noise, const char *noise) {
+    config.client.dither_noise = atof(noise);
+}
 
 CFGFUN(color, const char *colorclass, const char *border, const char *background, const char *text, const char *indicator, const char *child_border) {
 #define APPLY_COLORS(classname)                                                                              \

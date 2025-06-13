@@ -307,14 +307,13 @@ double lerp_double(double a, double b, double t)
     return a + (b - a) * t;
 }
 
-void draw_util_rectangle_gradient(surface_t *surface, color_t startColor, color_t endColor, double x, double y, double w, double h, bool use_dithering) {
+void draw_util_rectangle_gradient(surface_t *surface, color_t startColor, color_t endColor, double x, double y, double w, double h, bool use_dithering, double noise_gain) {
     // feature ideas:
     // - control offset?
 
     // TODO: implement reading these vars in the config! this is temporary!
     const int num_colors = 256;
     const int N = num_colors - 1;
-    const double noise_gain = 0.5;
 
     if (!surface_initialized(surface)) {
         return;
