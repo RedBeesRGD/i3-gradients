@@ -396,6 +396,7 @@ void draw_util_rectangle_gradient(surface_t *surface, color_t startColor, color_
         cairo_restore(surface->cr);
 
         cairo_surface_destroy(image_surface);
+        free(pixels);
     }
 
     else {
