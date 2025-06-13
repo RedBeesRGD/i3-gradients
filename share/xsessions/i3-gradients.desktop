@@ -1,9 +1,9 @@
 [Desktop Entry]
-Name=i3
+Name=i3-gradients
 Comment=improved dynamic tiling window manager
-Exec=i3
-TryExec=i3
+Exec=i3-gradients
+TryExec=i3-gradients
 Type=Application
-X-LightDM-DesktopName=i3
-DesktopNames=i3
+X-LightDM-DesktopName=i3-gradients
+DesktopNames=i3-gradients
 Keywords=tiling;wm;windowmanager;window;manager;
