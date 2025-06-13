@@ -8,11 +8,27 @@
  */
 #include "libi3.h"
 
+#include <math.h>
 #include <stdlib.h>
 #include <string.h>
 
 #include <xcb/xcb.h>
 #include <xcb/xcb_aux.h>
+
+#define THRESHOLD_MAP_SIZE 64
+#define THRESHOLD_MAP_DIMENSION 8
+
+/* 8x8 bayer matrix for ordered dithering. */
+const double threshold_map[THRESHOLD_MAP_SIZE] = {
+    0.0, 32.0, 8.0, 40.0, 2.0, 34.0, 10.0, 42.0,
+    48.0, 16.0, 56.0, 24.0, 50.0, 18.0, 58.0, 26.0,
+    12.0, 44.0, 4.0, 36.0, 14.0, 46.0, 6.0, 38.0,
+    60.0, 28.0, 52.0, 20.0, 62.0, 30.0, 54.0, 22.0,
+    3.0, 35.0, 11.0, 43.0, 1.0, 33.0, 9.0, 41.0,
+    51.0, 19.0, 59.0, 27.0, 49.0, 17.0, 57.0, 25.0,
+    15.0, 47.0, 7.0, 39.0, 13.0, 45.0, 5.0, 37.0,
+    63.0, 31.0, 55.0, 23.0, 61.0, 29.0, 53.0, 21.0
+};
 
 /* The default visual_type to use if none is specified when creating the surface. Must be defined globally. */
 extern xcb_visualtype_t *visual_type;
@@ -278,33 +294,131 @@ void draw_util_rectangle(surface_t *surface, color_t color, double x, double y, 
     cairo_restore(surface->cr);
 }
 
-void draw_util_rectangle_gradient(surface_t *surface, color_t startColor, color_t endColor, double x, double y, double w, double h) {
+// TODO: put this in a better place! (it might also be redundant, but too lazy to check)
+double clamp_double(double n, double a, double b) {
+    if (n < a) return a;
+    if (n > b) return b;
+    return n;
+}
+
+// TODO: put this in a better place! (it might also be redundant, but too lazy to check)
+double lerp_double(double a, double b, double t)
+{
+    return a + (b - a) * t;
+}
+
+void draw_util_rectangle_gradient(surface_t *surface, color_t startColor, color_t endColor, double x, double y, double w, double h, bool use_dithering) {
     // feature ideas:
-        // control offset?
-        // dithering
+    // - control offset?
+
+    // TODO: implement reading these vars in the config! this is temporary!
+    const int num_colors = 256;
+    const int N = num_colors - 1;
+    const double noise_gain = 0.5;
 
     if (!surface_initialized(surface)) {
         return;
     }
 
-    cairo_save(surface->cr);
+    if (use_dithering) {
+        int width = floor(w) + 1;
+        int height = floor(h) + 1;
+        int stride = width * sizeof(int);
 
-    cairo_set_operator(surface->cr, CAIRO_OPERATOR_SOURCE);
+        unsigned int *pixels = malloc(width * height * sizeof(int));
 
-    // Create a linear gradient from top-left to bottom-right of the rectangle
-    cairo_pattern_t *pattern = cairo_pattern_create_linear(x, y, x + w, y + h);
+        if (pixels == NULL) {
+            // fallback: draw gradients if we can't dither for some reason
+            goto draw_nondithered;
+        }        
 
-    cairo_pattern_add_color_stop_rgba(pattern, 0.0, startColor.red, startColor.green, startColor.blue, startColor.alpha); 
-    cairo_pattern_add_color_stop_rgba(pattern, 1.0, endColor.red, endColor.green, endColor.blue, endColor.alpha); 
+        double r0 = startColor.red, g0 = startColor.green, b0 = startColor.blue;
+        double r1 = endColor.red, g1 = endColor.green, b1 = endColor.blue;
 
-    cairo_set_source(surface->cr, pattern);
-    cairo_rectangle(surface->cr, x, y, w, h);
-    cairo_fill(surface->cr);
+        for(int j = 0; j < height; ++j) {                        
+            for(int i = 0; i < width; ++i) {
+                double t = (double)i / (double)width;            
 
-    CAIRO_SURFACE_FLUSH(surface->surface);
+                double r = lerp_double(r0, r1, t);
+                double g = lerp_double(g0, g1, t);
+                double b = lerp_double(b0, b1, t);
 
-    cairo_pattern_destroy(pattern);
-    cairo_restore(surface->cr);
+                // color quantization
+                double r_q = floor(r * (double)N + 0.5) / (double)N;
+                double g_q = floor(g * (double)N + 0.5) / (double)N;
+                double b_q = floor(b * (double)N + 0.5) / (double)N;
+                
+                int s_x = i % THRESHOLD_MAP_DIMENSION;
+                int s_y = j % THRESHOLD_MAP_DIMENSION;
+
+                double m_s = threshold_map[s_y * THRESHOLD_MAP_DIMENSION + s_x];
+
+                double noise = (m_s / (double)(THRESHOLD_MAP_SIZE)) - 0.5;
+
+                r_q = clamp_double(r_q + noise * noise_gain, 0.0, 1.0);
+                g_q = clamp_double(g_q + noise * noise_gain, 0.0, 1.0);
+                b_q = clamp_double(b_q + noise * noise_gain, 0.0, 1.0);
+
+                unsigned char r_c = (unsigned char)(floor(r_q * 255.0));
+                unsigned char g_c = (unsigned char)(floor(g_q * 255.0));
+                unsigned char b_c = (unsigned char)(floor(b_q * 255.0));
+
+                // pixel format is ARGB32
+                unsigned int pixel = 0xFF000000;
+                pixel |= ((unsigned int)r_c) << 16;
+                pixel |= ((unsigned int)g_c) << 8;
+                pixel |= ((unsigned int)b_c);
+
+                pixels[j * width + i] = pixel;
+            }
+        }
+
+        cairo_surface_t *image_surface = cairo_image_surface_create_for_data((unsigned char*)pixels,
+                                                                             CAIRO_FORMAT_ARGB32,
+                                                                             width,
+                                                                             height,
+                                                                             stride);
+
+        if (cairo_surface_status(image_surface) != CAIRO_STATUS_SUCCESS) {
+            if (pixels) free(pixels);
+            // fallback: draw gradients if we can't dither for some reason
+            goto draw_nondithered;
+        }
+
+        cairo_save(surface->cr);
+        cairo_set_operator(surface->cr, CAIRO_OPERATOR_SOURCE);
+
+        cairo_set_source_surface(surface->cr, image_surface, x, y);
+
+        cairo_paint(surface->cr);
+
+        CAIRO_SURFACE_FLUSH(surface->surface);
+        cairo_restore(surface->cr);
+
+        cairo_surface_destroy(image_surface);
+    }
+
+    else {
+    draw_nondithered:
+        cairo_save(surface->cr);
+
+        cairo_set_operator(surface->cr, CAIRO_OPERATOR_SOURCE);
+
+        // Create a linear gradient from top-left to bottom-right of the rectangle
+        cairo_pattern_t *pattern = cairo_pattern_create_linear(x, y, x + w, y + h);
+
+        cairo_pattern_add_color_stop_rgba(pattern, 0.0, startColor.red, startColor.green, startColor.blue, startColor.alpha); 
+        cairo_pattern_add_color_stop_rgba(pattern, 1.0, endColor.red, endColor.green, endColor.blue, endColor.alpha); 
+
+        cairo_set_source(surface->cr, pattern);
+        cairo_rectangle(surface->cr, x, y, w, h);
+        cairo_fill(surface->cr);
+
+        CAIRO_SURFACE_FLUSH(surface->surface);
+
+        cairo_pattern_destroy(pattern);       
+        cairo_restore(surface->cr);
+    }
 }
 /*
  * Clears a surface with the given color.

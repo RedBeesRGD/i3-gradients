@@ -3,6 +3,7 @@
 i3 with gradient titlebars.
 
 Toggle with config `gradients_on` (this will probably be renamed soon)
+Dithering can also be enabled with `dithering on/off` in the config.
 
 Set start and end colors with `client.gradient_start` and `client.gradient_end`
 

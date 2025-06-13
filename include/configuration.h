@@ -243,6 +243,7 @@ struct Config {
         color_t gradient_start; // i3-gradients
         color_t gradient_end;
         bool gradients_on;
+        bool dithering;
         struct Colortriple focused;
         struct Colortriple focused_inactive;
         struct Colortriple focused_tab_title;

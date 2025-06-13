@@ -222,6 +222,7 @@ struct deco_render_params {
     color_t gradient_start; // i3-gradients
     color_t gradient_end;
     bool gradients_on;
+    bool dithering;
     int border_style;
     struct width_height con_rect;
     struct width_height con_window_rect;

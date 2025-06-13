@@ -11,7 +11,7 @@ project(
     'c_std=c11',
     'warning_level=1',  # enable all warnings (-Wall)
     # TODO(https://github.com/i3/i3/issues/4087): switch to
-    # 'buildtype=debugoptimized',
+    'buildtype=debugoptimized',
   ],
   # Ubuntu 20.04 (supported until 2025) has meson 0.53.
   # We can revisit our minimum supported meson version
