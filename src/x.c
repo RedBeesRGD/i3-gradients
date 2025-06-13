@@ -503,7 +503,9 @@ void x_draw_decoration(Con *con) {
     p->gradients = config.client.gradients;
     p->dithering = config.client.dithering;
     p->dither_noise = config.client.dither_noise;
-    
+    p->gradient_offset_start = config.client.gradient_offset_start;
+    p->gradient_offset_end = config.client.gradient_offset_end;
+
     if (con->urgent) {
         p->color = &config.client.urgent;
     } else if (con == focused || con_inside_focused(con)) {
@@ -663,7 +665,9 @@ void x_draw_decoration(Con *con) {
                                      con->deco_rect.width,
                                      con->deco_rect.height,
                                      p->dithering,
-                                     p->dither_noise
+                                     p->dither_noise,
+                                     p->gradient_offset_start,
+                                     p->gradient_offset_end
                                     );
     }
 

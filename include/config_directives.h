@@ -115,5 +115,7 @@ CFGFUN(bar_strip_workspace_name, const char *value);
 CFGFUN(gradients, const char *value);
 CFGFUN(dithering, const char *value);
 CFGFUN(dither_noise, const char *noise);
+CFGFUN(gradient_offset_start, const char *offset);
+CFGFUN(gradient_offset_end, const char *offset);
 CFGFUN(bar_start);
 CFGFUN(bar_finish);

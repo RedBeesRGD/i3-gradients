@@ -59,7 +59,9 @@ state INITIAL:
   'tiling_drag'                            -> TILING_DRAG
   'gradients'                           -> GRADIENTS
   'dithering'                              -> DITHERING
-  'dither_noise'                        -> DITHER_NOISE                  
+  'dither_noise'                        -> DITHER_NOISE          
+  'client.gradient_offset_start'    -> GRADIENT_OFFSET_START
+  'client.gradient_offset_end'      -> GRADIENT_OFFSET_END       
   exectype = 'exec_always', 'exec'         -> EXEC
   colorclass = 'client.background'
       -> COLOR_SINGLE
@@ -437,6 +439,14 @@ state DITHERING:
 state DITHER_NOISE:
   noise = word
       -> call cfg_dither_noise($noise)
+
+state GRADIENT_OFFSET_START:
+    offset = word 
+        -> call cfg_gradient_offset_start($offset)
+
+state GRADIENT_OFFSET_END:
+    offset = word 
+        -> call cfg_gradient_offset_end($offset)
 
 # colorclass border background text indicator
 state COLOR_BORDER:

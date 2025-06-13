@@ -636,7 +636,7 @@ void draw_util_rectangle(surface_t *surface, color_t color, double x, double y, 
     i3-gradients addition: takes a start and end color to draw a gradient
 */
 
-void draw_util_rectangle_gradient(surface_t *surface, color_t startColor, color_t endColor, double x, double y, double w, double h, bool use_dithering, double dither_noise);
+void draw_util_rectangle_gradient(surface_t *surface, color_t startColor, color_t endColor, double x, double y, double w, double h, bool use_dithering, double dither_noise, double offsetStart, double offsetEnd);
 
 /**
  * Clears a surface with the given color.

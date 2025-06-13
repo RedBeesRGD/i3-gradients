@@ -622,6 +622,12 @@ CFGFUN(dithering, const char *value) {
 CFGFUN(dither_noise, const char *noise) {
     config.client.dither_noise = atof(noise);
 }
+CFGFUN(gradient_offset_start, const char *offset) {
+    config.client.gradient_offset_start = atof(offset);
+}
+CFGFUN(gradient_offset_end, const char *offset) {
+    config.client.gradient_offset_end = atof(offset);
+}
 
 CFGFUN(color, const char *colorclass, const char *border, const char *background, const char *text, const char *indicator, const char *child_border) {
 #define APPLY_COLORS(classname)                                                                              \

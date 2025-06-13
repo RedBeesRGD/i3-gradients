@@ -9,3 +9,4 @@
 - Textures
 - Glass?
 - First release, better readme
+- gradient & dither offsets

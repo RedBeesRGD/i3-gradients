@@ -307,7 +307,7 @@ double lerp_double(double a, double b, double t)
     return a + (b - a) * t;
 }
 
-void draw_util_rectangle_gradient(surface_t *surface, color_t startColor, color_t endColor, double x, double y, double w, double h, bool use_dithering, double noise_gain) {
+void draw_util_rectangle_gradient(surface_t *surface, color_t startColor, color_t endColor, double x, double y, double w, double h, bool use_dithering, double noise_gain, double offsetStart, double offsetEnd) {
     // feature ideas:
     // - control offset?
 
@@ -407,8 +407,8 @@ void draw_util_rectangle_gradient(surface_t *surface, color_t startColor, color_
         // Create a linear gradient from top-left to bottom-right of the rectangle
         cairo_pattern_t *pattern = cairo_pattern_create_linear(x, y, x + w, y + h);
 
-        cairo_pattern_add_color_stop_rgba(pattern, 0.0, startColor.red, startColor.green, startColor.blue, startColor.alpha); 
-        cairo_pattern_add_color_stop_rgba(pattern, 1.0, endColor.red, endColor.green, endColor.blue, endColor.alpha); 
+        cairo_pattern_add_color_stop_rgba(pattern, offsetStart, startColor.red, startColor.green, startColor.blue, startColor.alpha); 
+        cairo_pattern_add_color_stop_rgba(pattern, offsetEnd, endColor.red, endColor.green, endColor.blue, endColor.alpha); 
 
         cairo_set_source(surface->cr, pattern);
         cairo_rectangle(surface->cr, x, y, w, h);
