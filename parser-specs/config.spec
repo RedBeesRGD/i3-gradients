@@ -58,6 +58,7 @@ state INITIAL:
   'popup_during_fullscreen'                -> POPUP_DURING_FULLSCREEN
   'tiling_drag'                            -> TILING_DRAG
   'gradients_on'                           -> GRADIENTS_ON
+  'dithering'                              -> DITHERING
   exectype = 'exec_always', 'exec'         -> EXEC
   colorclass = 'client.background'
       -> COLOR_SINGLE
@@ -405,15 +406,21 @@ state COLOR_SINGLE:
 # gradients
 state GRADIENTS_ON:
   value = word
-      -> call cfg_gradients_on($value)
-
+  -> call cfg_gradients_on($value)
+  
 state COLOR_GRADIENT_START: # this can probably be just one but i suspect that would cause more problems rn 
     color = word
-        -> call cfg_color_single($colorclass, $color)
+    -> call cfg_color_single($colorclass, $color)
 
 state COLOR_GRADIENT_END: # this can probably be just one but i suspect that would cause more problems rn 
     color = word
-        -> call cfg_color_single($colorclass, $color)
+    -> call cfg_color_single($colorclass, $color)
+
+# dithering  
+state DITHERING:
+    value = word
+    -> call cfg_dithering($value)
+
 # colorclass border background text indicator
 state COLOR_BORDER:
   border = word

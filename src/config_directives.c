@@ -609,6 +609,11 @@ CFGFUN(color_single, const char *colorclass, const char *color) {
 CFGFUN(gradients_on, const char *value) {
     config.client.gradients_on = boolstr(value);
 }
+
+CFGFUN(dithering, const char *value) {
+    config.client.dithering = boolstr(value);
+}
+
 CFGFUN(color, const char *colorclass, const char *border, const char *background, const char *text, const char *indicator, const char *child_border) {
 #define APPLY_COLORS(classname)                                                                              \
     do {                                                                                                     \
