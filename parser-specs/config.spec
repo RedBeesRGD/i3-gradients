@@ -67,6 +67,10 @@ state INITIAL:
       -> COLOR_SINGLE
   colorclass = 'client.gradient_end'
       -> COLOR_SINGLE
+  colorclass = 'client.gradient_unfocused_start'
+      -> COLOR_SINGLE
+  colorclass = 'client.gradient_unfocused_end'
+      -> COLOR_SINGLE
   colorclass = 'client.focused_inactive', 'client.focused_tab_title', 'client.focused', 'client.unfocused', 'client.urgent', 'client.placeholder'
       -> COLOR_BORDER
 
@@ -414,6 +418,14 @@ state COLOR_GRADIENT_START: # this can probably be just one but i suspect that w
     -> call cfg_color_single($colorclass, $color)
 
 state COLOR_GRADIENT_END: # this can probably be just one but i suspect that would cause more problems rn 
+    color = word
+    -> call cfg_color_single($colorclass, $color)
+
+state COLOR_GRADIENT_UNFOCUSED_START:
+    color = word
+    -> call cfg_color_single($colorclass, $color)
+    
+state COLOR_GRADIENT_UNFOCUSED_END:
     color = word
     -> call cfg_color_single($colorclass, $color)
 

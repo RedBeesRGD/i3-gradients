@@ -604,6 +604,12 @@ CFGFUN(color_single, const char *colorclass, const char *color) {
     if(strcmp(colorclass, "client.gradient_end") == 0) {
     config.client.gradient_end = draw_util_hex_to_color(color);
     }
+    if(strcmp(colorclass, "client.gradient_unfocused_start") == 0) {
+    config.client.gradient_unfocused_start = draw_util_hex_to_color(color);
+    }
+    if(strcmp(colorclass, "client.gradient_unfocused_end") == 0) {
+    config.client.gradient_unfocused_end = draw_util_hex_to_color(color);
+    }
 }
 
 CFGFUN(gradients, const char *value) {

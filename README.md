@@ -7,5 +7,7 @@ Toggle with config `gradients on/off`. Dithering can also be toggled with `dithe
 # Options
 
 Gradient start and end colors: `client.gradient_start` and `client.gradient_end` followed by a hex color.
+Unfocused gradient start and end colors: `client.gradient_unfocused_start` and `client.gradient_unfocused_end` followed by a hex color.
+
 
 Dither noise/grain level: `dither_noise` followed by a floating-point number (recommended range 0-1)

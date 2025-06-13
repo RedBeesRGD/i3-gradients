@@ -497,7 +497,9 @@ void x_draw_decoration(Con *con) {
 
     /* find out which colors to use */
     p->gradient_start = config.client.gradient_start;
-    p->gradient_end = config.client.gradient_end;    
+    p->gradient_end = config.client.gradient_end;
+    p->gradient_unfocused_start = config.client.gradient_unfocused_start;
+    p->gradient_unfocused_end = config.client.gradient_unfocused_end;    
     p->gradients = config.client.gradients;
     p->dithering = config.client.dithering;
     p->dither_noise = config.client.dither_noise;
@@ -512,9 +514,17 @@ void x_draw_decoration(Con *con) {
             p->color = &config.client.focused_tab_title;
         } else {
             p->color = &config.client.focused_inactive;
+            if (p->gradients) {
+                p->gradient_start = p->gradient_unfocused_start;
+                p->gradient_end = p->gradient_unfocused_end;
+            }
         }
     } else {
         p->color = &config.client.unfocused;
+        if (p->gradients) {
+            p->gradient_start = p->gradient_unfocused_start;
+            p->gradient_end = p->gradient_unfocused_end;
+        }
     }
 
     p->border_style = con_border_style(con);
