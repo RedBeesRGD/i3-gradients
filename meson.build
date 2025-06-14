@@ -491,6 +491,7 @@ executable(
   'i3-gradients',
   i3srcs,
   install: true,
+  install_dir: '/usr/bin',
   include_directories: inc,
   dependencies: common_deps,
   link_with: libi3,
@@ -531,6 +532,7 @@ executable(
   ],
   install: true,
   include_directories: include_directories('include', 'i3-config-wizard'),
+  install_dir: '/usr/bin',
   dependencies: common_deps,
   link_with: libi3,
 )

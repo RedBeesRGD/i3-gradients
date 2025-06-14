@@ -211,4 +211,17 @@ bar {
 #
 # Please remove the following exec line:
 #######################################################################
-exec i3-config-wizard
+exec i3-gradients-config-wizard
+
+gradients on
+dithering off
+dither_noise 0.5
+
+client.gradient_start #1f1947
+client.gradient_end #2e9ef4
+
+client.gradient_unfocused_start #303331
+client.gradient_unfocused_end #9da6a0
+
+client.gradient_offset_start 0
+client.gradient_offset_end 1
