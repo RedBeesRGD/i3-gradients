@@ -8,7 +8,7 @@
 #include "libi3.h"
 
 #include <errno.h>
-#include <i3/ipc.h>
+#include "ipc.h"
 #include <inttypes.h>
 #include <stdint.h>
 #include <string.h>

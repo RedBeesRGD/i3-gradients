@@ -7,7 +7,7 @@
  */
 #include "libi3.h"
 
-#include <i3/ipc.h>
+#include "ipc.h"
 #include <stdint.h>
 
 /*
