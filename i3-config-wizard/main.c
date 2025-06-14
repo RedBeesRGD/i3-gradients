@@ -526,7 +526,9 @@ static int handle_expose(void) {
 
         txt(13, 6, "Yes, generate the config", white, black);
         txt(13, 8, "No, I will use the defaults", white, black);
-        txt(2, 10, "Please view the README at https://github.com/RedBeesRGD/i3-gradients/blob/main/README.md for configuration info.", red, black);
+        txt(2, 10, "Please view the README at", red, black);
+        txt(2, 11, "https://github.com/RedBeesRGD/i3-gradients/blob/main/README.md", blue, black);
+        txt(2, 12,"for configuration info.", red, black);
 
         txt(4, 6, "<Enter>", green, black);
 
@@ -838,7 +840,7 @@ int main(int argc, char *argv[]) {
     }
 
     xdg_config_home = resolve_tilde(xdg_config_home);
-    sasprintf(&config_path, "%s/i3/config", xdg_config_home);
+    sasprintf(&config_path, "%s/i3-gradients/config", xdg_config_home);
 
     /* Create $XDG_CONFIG_HOME/i3 if it does not yet exist */
     char *config_dir;
