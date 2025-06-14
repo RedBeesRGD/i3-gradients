@@ -516,7 +516,7 @@ static int handle_expose(void) {
     set_font(&font);
 
     if (current_step == STEP_WELCOME) {
-        txt(2, 2, "You have not configured i3 yet.", white, black);
+        txt(2, 2, "You have not configured i3-gradients yet.", white, black);
         txt(2, 3, "Do you want me to generate a config at", white, black);
 
         char *msg;
@@ -526,6 +526,7 @@ static int handle_expose(void) {
 
         txt(13, 6, "Yes, generate the config", white, black);
         txt(13, 8, "No, I will use the defaults", white, black);
+        txt(2, 10, "Please view the README at https://github.com/RedBeesRGD/i3-gradients/blob/main/README.md for configuration info.", red, black);
 
         txt(4, 6, "<Enter>", green, black);
 

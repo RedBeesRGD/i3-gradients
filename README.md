@@ -61,7 +61,7 @@ client.gradient_offset_end 1
 
 If you are already an i3 user, copy your existing config to an `i3-gradients` location and add these lines, adjusting to your taste. 
 
-As with most i3 configuration options, you can see your changes immediately after saving the config by reloading with `$mod+Shift+r`.
+As with most i3 configuration options, you can see your changes immediately after saving the config by reloading with `$mod+Shift+c`.
 
 <div align="center"><h1>For users new to i3</h1></div>
 If you are new to i3, you will want to run it once to generate the default config and read the introductory message about the modifier key, then add the above lines.
@@ -81,10 +81,13 @@ Here are a few features we plan to (hopefully) eventually add, ultimately extend
 
 * Config item for adjusting the number of colors used by the dithering algorithm
 * Adding support for offset control in dithered mode & adding offset control for the dithering itself
-* Options to apply gradients to more elements, such as window borders and i3bar buttons
+* Options to apply gradients to more elements, such as window borders and the i3bar
 * Further window decorations such as themable window control buttons & textures
 * Glass transparency (Aero-esque)
 * Moving gradients
+* Rounded corners
+* Select different gradients for different windows/window groups
+* Sway version
 
 <div align="center"><h1>Known bugs</h1></div>
 
