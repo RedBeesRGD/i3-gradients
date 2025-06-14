@@ -248,8 +248,8 @@ if get_option('mans')
   endforeach
 
   pod2man_inputs = [
-    'i3-gradients-dmenu-desktop',
-    'i3-gradients-save-tree',
+    'i3-dmenu-desktop',
+    'i3-save-tree',
   ]
   foreach m : pod2man_inputs
     custom_target(
