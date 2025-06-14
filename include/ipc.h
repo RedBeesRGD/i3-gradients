@@ -19,8 +19,6 @@
 #include "tree.h"
 #include "configuration.h"
 
-#include "i3/ipc.h"
-
 extern char *current_socketpath;
 
 typedef struct ipc_client {

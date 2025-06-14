@@ -10,7 +10,7 @@
 #include <ev.h>
 #include <getopt.h>
 #include <glob.h>
-#include <i3/ipc.h>
+#include "ipc2.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

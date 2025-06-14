@@ -36,6 +36,8 @@
 #include "data.h"
 #include "util.h"
 #include "ipc.h"
+#include "ipc2.h"
+
 #include "tree.h"
 #include "log.h"
 #include "xcb.h"

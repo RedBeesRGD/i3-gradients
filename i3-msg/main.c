@@ -18,7 +18,7 @@
 
 #include <err.h>
 #include <getopt.h>
-#include <i3/ipc.h>
+#include "ipc2.h"
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>

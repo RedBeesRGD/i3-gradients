@@ -11,7 +11,7 @@
 
 #include <err.h>
 #include <ev.h>
-#include <i3/ipc.h>
+#include "ipc2.h"
 #include <stddef.h>
 #include <stdlib.h>
 #include <string.h>
