@@ -971,8 +971,8 @@ int main(int argc, char *argv[]) {
                         A__NET_WM_NAME,
                         A_UTF8_STRING,
                         8,
-                        strlen("i3: first configuration"),
-                        "i3: first configuration");
+                        strlen("i3-gradients: first configuration"),
+                        "i3-gradients: first configuration");
 
     /* Initialize drawable surface */
     draw_util_surface_init(conn, &surface, win, get_visualtype(root_screen), WIN_WIDTH, WIN_HEIGHT);
