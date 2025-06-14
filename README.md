@@ -14,22 +14,35 @@ i3 with highly customizable gradient titlebars, dithering effects, and more comi
 
 # Setup
 </div>
-There aren't any binary distributions yet, so you'll have to build from source.
+
+On **Arch-based distros** (including Manjaro, EndeavourOS, Artix, etc.) with access to the **[Arch User Repository](https://aur.archlinux.org/)**,  you can install i3-gradients via the package [i3-gradients-git](https://aur.archlinux.org/packages/i3-gradients-git).
+
+The easiest way to do this is via an AUR helper, such as [yay](https://github.com/Jguer/yay):
+
+```
+yay -Sy i3-gradients-git
+```
+
+On **non-Arch platforms**, you can install i3-gradients via the following procedure:
+
+* consult the [PKGBUILD](PKGBUILD) and install the packages listed under `depends` and `makedepends`
+* `git clone https://github.com/RedBeesRGD/i3-gradients.git`
+* `cd i3-gradients && mkdir build`
+* `meson setup build/`
+* `cd build && sudo meson install`
+
+This will install i3-gradients at the system level (in `/usr/bin`). You can also run `meson compile` to generate an i3-gradients binary in the `build` folder without installing it.
+
+**Installing i3-gradients at the system level conflicts with mainline i3 due to various shared filenames. The AUR package requires that you remove i3 before installing i3-gradients, and it is recommended that you do this if you install via `meson install`.**
 
 <br>
 
-If you are on Arch or another platform with source packages, you can install the package for stock i3 (AUR: [i3-git](https://aur.archlinux.org/packages/i3-git)) to pull in the dependencies. Advanced users can read the <a href="meson.build">meson.build</a> file to see the dependencies - you may also need your distribution's i3 development package such as `i3-devel`. You will also need Meson itself.
+**After installation**:
 
-Once you have the dependencies: 
-
-- `git clone https://github.com/RedBeesRGD/i3-gradients.git`
-- `cd i3-gradients && mkdir build`
-- `meson setup build/`
-- `cd build && meson compile` -> generates an `i3-gradients` binary in the `build` folder
 
 **Xinit users** can modify their [xinit](https://wiki.archlinux.org/title/Xinit) script or `startx` command to launch the `i3-gradients` binary instead of `i3`.
 
-**Display manager users** (only tested with SDDM) can run `meson install` to make i3-gradients available as an option in their DM. **If you are using a desktop environment like KDE or GNOME, this is what you want - the 'display manager' is your login screen.**
+**Display manager users (KDE, GNOME, etc. - currenly tested with KDE's SDDM)**  should have i3-gradients appear as an option on their login screen, as long as the AUR package or `meson install` were used.
 
 <div align="center"><h1>Configuration</h1></div>
 
@@ -42,35 +55,16 @@ i3-gradients uses its own configuration file. The locations are the same as stoc
 * Gradient width: `client.gradient_offset_start/end (number)`(floating-point number between 0 and 1 - default is 0 for start and 1 for end) - **this currently only works if dithering is disabled**
 * Dithering level: `dither_noise (number)` (floating-point number, recommended range 0-1, default is 0.5)
 
-Here is an example config which replicates the default values:
-
-```
-gradients on
-dithering off
-dither_noise 0.5
-
-client.gradient_start #1f1947
-client.gradient_end #2e9ef4
-
-client.gradient_unfocused_start #303331
-client.gradient_unfocused_end #9da6a0
-
-client.gradient_offset_start 0
-client.gradient_offset_end 1
-```
-
-If you are already an i3 user, copy your existing config to an `i3-gradients` location and add these lines, adjusting to your taste. 
+By default, i3-gradients will generate a new configuration file in `~/.config/i3-gradients/config` on first run, with defaults for each of the gradient options added at the end. Feel free to modify these to your liking, or replace it with your existing i3 config file and add back the gradient options (we may add a feature to automate this process soon). The defaults will also be used even if they are not specified in the config file.
 
 As with most i3 configuration options, you can see your changes immediately after saving the config by reloading with `$mod+Shift+c`.
 
 <div align="center"><h1>For users new to i3</h1></div>
-If you are new to i3, you will want to run it once to generate the default config and read the introductory message about the modifier key, then add the above lines.
 
-<br>
 
 i3 can be challenging for new users - there are many resources already online on how to configure and use it. Here are our basic recommendations for people who wish to try out i3:
 
-* Install+configure `i3bar` and `dmenu`
+* Install+configure `i3status` and `dmenu`
 * Adjust the configuration file to map `$mod+Return` to the terminal of your choice
 * Use a program like `feh` to set a desktop wallpaper, if desired
 * Learn the basics of i3's keyboard commands and the i3 keybind configuration - the [i3 reference card](https://i3wm.org/docs/refcard.html) may be useful.
@@ -88,10 +82,6 @@ Here are a few features we plan to (hopefully) eventually add, ultimately extend
 * Rounded corners
 * Select different gradients for different windows/window groups
 * Sway version
-
-<div align="center"><h1>Known bugs</h1></div>
-
-* Title bar rendering breaks in tabbed mode when dithering is enabled.
 
 <div align="center"><h1>Contributions</h1></div>
 
