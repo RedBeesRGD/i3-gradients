@@ -607,7 +607,7 @@ install_subdir(
 
 install_headers(
   'include/ipc.h',
-  subdir: 'i3-gradients',
+  subdir: 'i3',
 )
 
 # We cannot use configure_file for complete-run.pl.in and i3test.pm.in
