@@ -528,7 +528,7 @@ static int handle_expose(void) {
         txt(13, 6, "Yes, generate the config", white, black);
         txt(13, 8, "No, I will use the defaults", white, black);
         txt(2, 10, "Please view the README at", red, black);
-        txt(2, 11, "https://github.com/RedBeesRGD/i3-gradients/blob/main/README.md", blue, black);
+        txt(2, 11, "github.com/RedBeesRGD/i3-gradients", blue, black);
         txt(2, 12,"for configuration info.", red, black);
 
         txt(4, 6, "<Enter>", green, black);
