@@ -201,6 +201,7 @@ bool load_configuration(const char *override_configpath, config_load_t load_type
     config.client.gradient_unfocused_start = draw_util_hex_to_color("#303331");
     config.client.gradient_unfocused_end = draw_util_hex_to_color("#9da6a0");
     config.client.dither_noise = 0.5;
+    config.client.gradients = 1;
     config.client.gradient_offset_start = 0.0;
     config.client.gradient_offset_end = 1.0;
     INIT_COLOR(config.client.focused, "#4c7899", "#285577", "#ffffff", "#2e9ef4");
