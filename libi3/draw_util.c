@@ -320,8 +320,8 @@ void draw_util_rectangle_gradient(surface_t *surface, color_t startColor, color_
     }
 
     if (use_dithering) {
-        int width = floor(w) + 1;
-        int height = floor(h) + 1;
+        int width = floor(w);
+        int height = floor(h);
         int stride = width * sizeof(int);
 
         unsigned int *pixels = malloc(width * height * sizeof(int));
@@ -386,6 +386,10 @@ void draw_util_rectangle_gradient(surface_t *surface, color_t startColor, color_
 
         cairo_save(surface->cr);
         cairo_set_operator(surface->cr, CAIRO_OPERATOR_SOURCE);
+
+        cairo_rectangle(surface->cr, x, y, w, h);
+        cairo_clip(surface->cr);
+        cairo_new_path(surface->cr);
 
         cairo_set_source_surface(surface->cr, image_surface, x, y);
 
