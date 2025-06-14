@@ -198,17 +198,17 @@ if get_option('mans')
   pod2man = find_program('pod2man')
 
   man_inputs = [
-    'man/i3.man',
-    'man/i3bar.man',
-    'man/i3-msg.man',
-    'man/i3-input.man',
-    'man/i3-nagbar.man',
-    'man/i3-config-wizard.man',
-    'man/i3-migrate-config-to-v4.man',
-    'man/i3-sensible-editor.man',
-    'man/i3-sensible-pager.man',
-    'man/i3-sensible-terminal.man',
-    'man/i3-dump-log.man',
+    'man/i3-gradients.man',
+    'man/i3bar-gradients.man',
+    'man/i3-gradients-msg.man',
+    'man/i3-gradients-input.man',
+    'man/i3-gradients-nagbar.man',
+    'man/i3-gradients-config-wizard.man',
+    'man/i3-gradients-migrate-config-to-v4.man',
+    'man/i3-gradients-sensible-editor.man',
+    'man/i3-gradients-sensible-pager.man',
+    'man/i3-gradients-sensible-terminal.man',
+    'man/i3-gradients-dump-log.man',
   ]
 
   foreach m : man_inputs
@@ -282,7 +282,7 @@ else
 	'man/i3-gradients-config-wizard.1',
 	'man/i3-gradients-migrate-config-to-v4.1',
 	'man/i3-gradients-sensible-editor.1',
-	'man/i3-gradients3-sensible-pager.1',
+	'man/i3-gradients-sensible-pager.1',
 	'man/i3-gradients-sensible-terminal.1',
 	'man/i3-gradients-dump-log.1',
 	'man/i3-gradients-dmenu-desktop.1',
@@ -499,7 +499,7 @@ executable(
 
 # This is the only currently working way of installing a symbolic link:
 meson.add_install_script(
-  'meson/meson-install-i3-with-shmlog',
+  'meson/meson-install-i3-gradients-with-shmlog',
   get_option('bindir'),
 )
 
