@@ -248,8 +248,8 @@ if get_option('mans')
   endforeach
 
   pod2man_inputs = [
-    'i3-dmenu-desktop',
-    'i3-save-tree',
+    'i3-gradients-dmenu-desktop',
+    'i3-gradients-save-tree',
   ]
   foreach m : pod2man_inputs
     custom_target(
@@ -271,22 +271,22 @@ if get_option('mans')
   endforeach
 
 else
-  if run_command('[', '-f', 'man/i3.1', ']', check: false).returncode() == 0
+  if run_command('[', '-f', 'man/i3-gradients.1', ']', check: false).returncode() == 0
     install_data(
       [
-	'man/i3.1',
-	'man/i3bar.1',
-	'man/i3-msg.1',
-	'man/i3-input.1',
-	'man/i3-nagbar.1',
-	'man/i3-config-wizard.1',
-	'man/i3-migrate-config-to-v4.1',
-	'man/i3-sensible-editor.1',
-	'man/i3-sensible-pager.1',
-	'man/i3-sensible-terminal.1',
-	'man/i3-dump-log.1',
-	'man/i3-dmenu-desktop.1',
-	'man/i3-save-tree.1',
+	'man/i3-gradients.1',
+	'man/i3bar-gradients.1',
+	'man/i3-gradients-msg.1',
+	'man/i3-gradients-input.1',
+	'man/i3-gradients-nagbar.1',
+	'man/i3-gradients-config-wizard.1',
+	'man/i3-gradients-migrate-config-to-v4.1',
+	'man/i3-gradients-sensible-editor.1',
+	'man/i3-gradients3-sensible-pager.1',
+	'man/i3-gradients-sensible-terminal.1',
+	'man/i3-gradients-dump-log.1',
+	'man/i3-gradients-dmenu-desktop.1',
+	'man/i3-gradients-save-tree.1',
       ],
       install_dir: man1,
     )
@@ -504,7 +504,7 @@ meson.add_install_script(
 )
 
 executable(
-  'i3bar',
+  'i3bar-gradients',
   [
     'i3bar/src/child.c',
     'i3bar/src/config.c',
@@ -538,7 +538,7 @@ executable(
 )
 
 executable(
-  'i3-dump-log',
+  'i3-gradients-dump-log',
   'i3-dump-log/main.c',
   install: true,
   include_directories: inc,
@@ -547,7 +547,7 @@ executable(
 )
 
 executable(
-  'i3-input',
+  'i3-gradients-input',
   [
     'i3-input/i3-input.h',
     'i3-input/keysym2ucs.h',
@@ -561,7 +561,7 @@ executable(
 )
 
 executable(
-  'i3-msg',
+  'i3-gradients-msg',
   'i3-msg/main.c',
   install: true,
   include_directories: inc,
@@ -570,7 +570,7 @@ executable(
 )
 
 executable(
-  'i3-nagbar',
+  'i3-gradients-nagbar',
   [
     'i3-nagbar/i3-nagbar-atoms.xmacro.h',
     'i3-nagbar/main.c',
@@ -583,12 +583,12 @@ executable(
 
 install_data(
   [
-    'i3-dmenu-desktop',
-    'i3-migrate-config-to-v4',
-    'i3-save-tree',
-    'i3-sensible-editor',
-    'i3-sensible-pager',
-    'i3-sensible-terminal',
+    'i3-gradients-dmenu-desktop',
+    'i3-gradients-migrate-config-to-v4',
+    'i3-gradients-save-tree',
+    'i3-gradients-sensible-editor',
+    'i3-gradients-sensible-pager',
+    'i3-gradients-sensible-terminal',
   ],
   install_dir: 'bin',
 )
