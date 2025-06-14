@@ -594,7 +594,7 @@ install_data(
 install_subdir(
   'etc',
   strip_directory: true,
-  install_dir: join_paths(get_option('sysconfdir'), 'i3'),
+  install_dir: join_paths(get_option('sysconfdir'), 'i3-gradients'),
 )
 
 install_subdir(
