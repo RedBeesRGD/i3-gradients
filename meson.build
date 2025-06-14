@@ -305,7 +305,7 @@ m_dep = cc.find_library('m', required: false)
 rt_dep = cc.find_library('rt', required: false)
 iconv_dep = cc.find_library('iconv', required: false)
 
-libsn_dep = dependency('libstartup-notification-1.0', method: 'pkg-config')
+libsn_dep = dependency('libstartup-notification-1.0', method: 'pkg-config', required: true)
 xcb_dep = dependency('xcb', method: 'pkg-config')
 xcb_xkb_dep = dependency('xcb-xkb', method: 'pkg-config')
 xcb_xinerama_dep = dependency('xcb-xinerama', method: 'pkg-config')
