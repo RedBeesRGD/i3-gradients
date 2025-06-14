@@ -509,6 +509,7 @@ static int handle_expose(void) {
     const color_t white = draw_util_hex_to_color("#FFFFFF");
     const color_t green = draw_util_hex_to_color("#00FF00");
     const color_t red = draw_util_hex_to_color("#FF0000");
+    const color_t blue = draw_util_hex_to_color("#1900FF");
 
     /* draw background */
     draw_util_clear_surface(&surface, black);
