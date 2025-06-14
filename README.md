@@ -25,7 +25,7 @@ yay -Sy i3-gradients-git
 
 On **non-Arch platforms**, you can install i3-gradients via the following procedure:
 
-* consult the [PKGBUILD](PKGBUILD) and install the packages listed under `depends` and `makedepends`
+* consult the [AUR page](https://aur.archlinux.org/packages/i3-gradients-git) and install the packages listed under "Dependencies"
 * `git clone https://github.com/RedBeesRGD/i3-gradients.git`
 * `cd i3-gradients && mkdir build`
 * `meson setup build/`
