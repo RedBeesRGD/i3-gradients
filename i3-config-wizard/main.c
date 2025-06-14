@@ -689,9 +689,9 @@ static void finish(void) {
         errx(1, "xkb_x11_keymap_new_from_device failed");
     }
 
-    FILE *kc_config = fopen(SYSCONFDIR "/i3/config.keycodes", "r");
+    FILE *kc_config = fopen(SYSCONFDIR "/i3-gradients/config.keycodes", "r");
     if (kc_config == NULL) {
-        err(1, "Could not open input file \"%s\"", SYSCONFDIR "/i3/config.keycodes");
+        err(1, "Could not open input file \"%s\"", SYSCONFDIR "/i3-gradients/config.keycodes");
     }
 
     FILE *ks_config = fopen(config_path, "w");
@@ -846,7 +846,7 @@ int main(int argc, char *argv[]) {
     /* Create $XDG_CONFIG_HOME/i3 if it does not yet exist */
     char *config_dir;
     struct stat stbuf;
-    sasprintf(&config_dir, "%s/i3", xdg_config_home);
+    sasprintf(&config_dir, "%s/i3-gradients", xdg_config_home);
     if (stat(config_dir, &stbuf) != 0) {
         if (mkdirp(config_dir, DEFAULT_DIR_MODE) != 0) {
             err(EXIT_FAILURE, "mkdirp(%s) failed", config_dir);

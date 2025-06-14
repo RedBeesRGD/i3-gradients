@@ -4,7 +4,7 @@
 # the meson book: https://meson-manual.com/
 
 project(
-  'i3',
+  'i3-gradients',
   'c',
   version: '4.24',
   default_options: [
@@ -73,7 +73,7 @@ config_h = declare_dependency(
 
 docdir = get_option('docdir')
 if docdir == ''
-  docdir = join_paths(get_option('datadir'), 'doc', 'i3')
+  docdir = join_paths(get_option('datadir'), 'doc', 'i3-gradients')
 endif
 
 if get_option('docs')
@@ -368,7 +368,7 @@ if not cdata.get('HAVE_MKDIRP')
 endif
 
 libi3 = static_library(
-  'i3',
+  'i3-gradients',
   libi3srcs,
   include_directories: inc,
   dependencies: [
@@ -522,7 +522,7 @@ executable(
 )
 
 executable(
-  'i3-config-wizard',
+  'i3-gradients-config-wizard',
   [
     'i3-config-wizard/i3-config-wizard-atoms.xmacro.h',
     'i3-config-wizard/main.c',
@@ -605,7 +605,7 @@ install_subdir(
 
 install_headers(
   'include/ipc.h',
-  subdir: 'i3',
+  subdir: 'i3-gradients',
 )
 
 # We cannot use configure_file for complete-run.pl.in and i3test.pm.in
